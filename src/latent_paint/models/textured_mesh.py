@@ -209,7 +209,7 @@ class TexturedMeshModel(nn.Module):
                                                         look_at_height=self.dy)
 
         mask = mask.detach()
-        pred_map = pred_back * (1 - mask) + pred_features * mask
+        pred_map = pred_features #pred_back * (1 - mask) + pred_features * mask
 
         if self.latent_mode and mask.shape[-1] != 64:
             mask = F.interpolate(mask, (64, 64), mode='bicubic')

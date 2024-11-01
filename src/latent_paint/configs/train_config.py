@@ -24,9 +24,9 @@ class RenderConfig:
 class GuideConfig:
     """ Parameters defining the guidance """
     # Guiding text prompt
-    text: str
+    text: str = 'apple'
     # The mesh to paint
-    shape_path: str
+    shape_path: str = '/root/.objaverse/hf-objaverse-v1/glbs/000-090/da0cfd4c6a4e41c5aaf06797b463235b.glb'
     # Append direction to text prompts
     append_direction: bool = True
     # A Textual-Inversion concept to use
@@ -91,8 +91,8 @@ class TrainConfig:
     optim: OptimConfig = field(default_factory=OptimConfig)
     guide: GuideConfig = field(default_factory=GuideConfig)
 
-    def __post_init__(self):
-        if self.log.eval_only and (self.optim.ckpt is None and not self.optim.resume):
-            logger.warning('NOTICE! log.eval_only=True, but no checkpoint was chosen -> Manually setting optim.resume to True')
-            self.optim.resume = True
+    # def __post_init__(self):
+    #     if self.log.eval_only and (self.optim.ckpt is None and not self.optim.resume):
+    #         logger.warning('NOTICE! log.eval_only=True, but no checkpoint was chosen -> Manually setting optim.resume to True')
+    #         self.optim.resume = True
 

@@ -9,7 +9,8 @@ class Mesh:
 
         if ".obj" in obj_path:
             try:
-                mesh = kal.io.obj.import_mesh(obj_path, with_normals=True, with_materials=True)
+              mesh = kal.io.gltf.import_mesh(obj_path)
+                # mesh = kal.io.obj.import_mesh(obj_path, with_normals=True, with_materials=True)
             except:
                 mesh = kal.io.obj.import_mesh(obj_path, with_normals=True, with_materials=False)
 
