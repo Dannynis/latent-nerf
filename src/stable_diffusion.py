@@ -183,11 +183,19 @@ class StableDiffusion(nn.Module):
         # latents = F.interpolate(latents, (64, 64), mode='bilinear', align_corners=False)
         latents = 1 / 0.18215 * latents
 
+
+        self.unet.to('cpu')
+        self.text_encoder.to('cpu')
+        
+
         with torch.no_grad():
             imgs = self.vae.decode(latents).sample
 
         imgs = (imgs / 2 + 0.5).clamp(0, 1)
         
+        self.unet.to(self.device)
+        self.text_encoder.to(self.device)
+
         return imgs
 
     def encode_imgs(self, imgs):
